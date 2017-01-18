@@ -30,9 +30,24 @@ namespace Hunting_and_Fishing.Controllers
                 using (StoreDbContext db = new StoreDbContext())
 
                 {
+                    //Password hash
+                    var password = model.Password;
+                    byte[] data = System.Text.Encoding.ASCII.GetBytes(password);
+                    data = new System.Security.Cryptography.SHA256Managed().ComputeHash(data);
+                    String hash = System.Text.Encoding.ASCII.GetString(data);
+
+                    var confPass = model.ConfirmPassword;
+                    byte[] cdata = System.Text.Encoding.ASCII.GetBytes(confPass);
+                    cdata = new System.Security.Cryptography.SHA256Managed().ComputeHash(cdata);
+                    String chash = System.Text.Encoding.ASCII.GetString(cdata);
+
+                    model.Password = hash;
+                    model.ConfirmPassword = chash;
+
                     
+
                     db.Users.Add(model);
-    
+
                     db.SaveChanges();
 
                     ModelState.Clear();
@@ -45,8 +60,50 @@ namespace Hunting_and_Fishing.Controllers
 
             }
 
-            return View("~/Views/Home/Index.cshtml", model);
+            return View("~/Views/Home/Index.cshtml");
 
         }
+
+        public ActionResult Login()
+        {
+            return View("~/Views/Account/_Login.cshtml");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Login(Users model)
+        {
+            if (ModelState.IsValid)
+            {
+                
+            }
+            using (StoreDbContext db = new StoreDbContext())
+            {
+
+                var password = model.Password;
+                byte[] data = System.Text.Encoding.ASCII.GetBytes(password);
+                data = new System.Security.Cryptography.SHA256Managed().ComputeHash(data);
+                String hash = System.Text.Encoding.ASCII.GetString(data);
+
+                model.Password = hash;
+
+                var user = db.Users.FirstOrDefault(a => a.Username.Equals(model.Username) && a.Password.Equals(model.Password));
+                if (user != null)
+                {
+                    return RedirectToAction("LoggedIn"); //after login
+                }
+                else
+                {
+                    Response.Write("Invalid username or password.");
+                }
+            }
+            return View("~/Views/Home/Index.cshtml");
+        }
+
+        public ActionResult LoggedIn()
+        {  
+                return View();
+        }
+
     }
 }

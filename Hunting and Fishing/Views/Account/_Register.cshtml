@@ -1,6 +1,7 @@
-﻿@model Hunting_and_Fishing.Models.Users
+﻿@using System.Web.UI.HtmlControls
+@model Hunting_and_Fishing.Models.Users
 
-@using (Html.BeginForm("Register", "Account"))
+@using (Html.BeginForm("Register", "Account", FormMethod.Post))
 {
     <form class="form-horizontal loginFrm">
 

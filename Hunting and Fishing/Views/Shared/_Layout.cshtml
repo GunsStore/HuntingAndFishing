@@ -13,7 +13,7 @@
         <span class="icon-bar"></span>
     </a>
     <div class="navbar-inner">
-        <a class="brand" href="../Home/Index.cshtml"><img src="../../Content/img/logo.jpg" style="width: 193px; height: 47px " alt="Bootsshop" /></a>
+        <a class="brand"><img src="../../Content/img/logo.jpg" style="width: 193px; height: 47px" alt="Bootsshop"></a>
         @*Search bar*@
         @*<form class="form-inline navbar-search" method="post" action="products.html">
                     <input id="srchFld" class="srchTxt" type="text" />
@@ -38,23 +38,7 @@
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                         <h3>Login Block</h3>
                     </div>
-                    <div class="modal-body">
-                        <form class="form-horizontal loginFrm">
-                            <div class="control-group">
-                                <input type="text" id="inputEmail" placeholder="Email">
-                            </div>
-                            <div class="control-group">
-                                <input type="password" id="inputPassword" placeholder="Password">
-                            </div>
-                            <div class="control-group">
-                                <label class="checkbox">
-                                    <input type="checkbox"> Remember me
-                                </label>
-                            </div>
-                        </form>
-                        <button type="submit" class="btn btn-success">Sign in</button>
-                        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-                    </div>
+                    @Html.Partial("~/Views/Account/_Login.cshtml")
                 </div>
             </li>
             <li class="">
