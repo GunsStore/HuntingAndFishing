@@ -6,10 +6,8 @@ namespace Hunting_and_Fishing.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class Users
+    public partial class Register
     {
-        
-
         public int Id { get; set; }
 
         [Required(ErrorMessage = "Username is required.")]
@@ -30,5 +28,19 @@ namespace Hunting_and_Fishing.Models
         [MaxLength(50)]
         [Compare("Password", ErrorMessage = "Confirm your Password.")]
         public string ConfirmPassword { get; set; }
+    }
+
+    public class LogIn
+    {
+        public int Id { get; set; }
+
+        [Required(ErrorMessage = "Username is required.")]
+        [StringLength(100)]
+        public string Username { get; set; }
+
+        [Required(ErrorMessage = "Password is required.")]
+        [MaxLength(50)]
+        [DataType(DataType.Password)]
+        public string Password { get; set; }
     }
 }

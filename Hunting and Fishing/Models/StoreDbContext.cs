@@ -12,7 +12,7 @@ namespace Hunting_and_Fishing.Models
         {
         }
 
-        public virtual DbSet<Users> Users { get; set; }
+        public virtual DbSet<Register>Users { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

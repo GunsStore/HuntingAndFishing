@@ -19,7 +19,7 @@ namespace Hunting_and_Fishing.Controllers
 
         [ValidateAntiForgeryToken]
 
-        public ActionResult Register(Users model)
+        public ActionResult Register(Register model)
 
         {
 
@@ -71,13 +71,11 @@ namespace Hunting_and_Fishing.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Login(Users model)
+        public ActionResult Login(LogIn model)
         {
             if (ModelState.IsValid)
             {
-                
-            }
-            using (StoreDbContext db = new StoreDbContext())
+                using (StoreDbContext db = new StoreDbContext())
             {
 
                 var password = model.Password;
@@ -94,8 +92,9 @@ namespace Hunting_and_Fishing.Controllers
                 }
                 else
                 {
-                    Response.Write("Invalid username or password.");
+                    
                 }
+            }
             }
             return View("~/Views/Home/Index.cshtml");
         }

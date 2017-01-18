@@ -1,21 +1,22 @@
-﻿@model Hunting_and_Fishing.Models.Users
-
+﻿<!DOCTYPE html>
+<html>
 <head>
-
+    <title>@ViewBag.Title Hunting and Fishing</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
 </head>
+
 <body>
-
-
-<div id="logoArea" class="navbar">
-    <a id="smallScreen" data-target="#topMenu" data-toggle="collapse" class="btn btn-navbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-    </a>
-    <div class="navbar-inner">
-        <a class="brand"><img src="../../Content/img/logo.jpg" style="width: 193px; height: 47px" alt="Bootsshop"></a>
-        @*Search bar*@
-        @*<form class="form-inline navbar-search" method="post" action="products.html">
+    <div id="logoArea" class="navbar">
+        <a id="smallScreen" data-target="#topMenu" data-toggle="collapse" class="btn btn-navbar">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </a>
+        <div class="navbar-inner">
+            <a class="brand"><img src="../../Content/img/logo.jpg" style="width: 193px; height: 47px" alt="Bootsshop"></a>
+            @*Search bar*@
+            @*<form class="form-inline navbar-search" method="post" action="products.html">
                     <input id="srchFld" class="srchTxt" type="text" />
                     <select class="srchTxt">
                         <option>All</option>
@@ -27,41 +28,44 @@
                     </select>
                     <button type="submit" id="submitButton" class="btn btn-primary">Go</button>
                 </form>*@
-        <ul id="topMenu" class="nav pull-right">
-            <li class=""><a href="@*special_offer.html*@">Specials Offer</a></li>
-            <li class=""><a href="@*normal.html*@">Delivery</a></li>
-            <li class=""><a href="@*contact.html*@">Contact</a></li>
-            <li class="">
-                <a href="#login" role="button" data-toggle="modal" style="padding-right: 0"><span class="btn btn-large btn-success">Login</span></a>
-                <div id="login" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        <h3>Login Block</h3>
+            <ul id="topMenu" class="nav pull-right">
+                <li class=""><a href="@*special_offer.html*@">Specials Offer</a></li>
+                <li class=""><a href="@*normal.html*@">Delivery</a></li>
+                <li class=""><a href="@*contact.html*@">Contact</a></li>
+                <li class="">
+                    <a href="#login" role="button" data-toggle="modal" style="padding-right: 0"><span class="btn btn-large btn-success">Login</span></a>
+                    <div id="login" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h3>Login Block</h3>
+                        </div>
+                        @*@Html.Partial("~/Views/Account/_Login.cshtml")*@
                     </div>
-                    @Html.Partial("~/Views/Account/_Login.cshtml")
-                </div>
-            </li>
-            <li class="">
-                <a href="#register" role="button" data-toggle="modal" style="padding-right: 0"><span class="btn btn-large btn-success">Register</span></a>
-                <div id="register" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="register" aria-hidden="false">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        <h3>Register</h3>
+                </li>
+                <li class="">
+                    <a href="#register" role="button" data-toggle="modal" style="padding-right: 0"><span class="btn btn-large btn-success">Register</span></a>
+                    <div id="register" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="register" aria-hidden="false">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h3>Register</h3>
+                        </div>
+                        <div class="modal-body">
+                            @*@Html.Partial("~/Views/Account/_Register.cshtml")*@
+                        </div>
                     </div>
-                    <div class="modal-body">
-                        @Html.Partial("~/Views/Account/_Register.cshtml")
-                    </div>
-                </div>
-            </li>
-        </ul>
+                </li>
+            </ul>
+        </div>
     </div>
-</div>
-    @section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-      }
-
     @RenderBody()
 
-    
-</body>
 
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+        
+    }
+
+
+
+</body>
+</html>

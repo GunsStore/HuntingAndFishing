@@ -272,9 +272,6 @@
     <Content Include="Views\Account\_Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Account\TestLogin.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Account\LoggedIn.cshtml" />
   </ItemGroup>
   <PropertyGroup>

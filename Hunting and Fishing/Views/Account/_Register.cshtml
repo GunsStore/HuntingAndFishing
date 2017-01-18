@@ -1,5 +1,5 @@
 ﻿@using System.Web.UI.HtmlControls
-@model Hunting_and_Fishing.Models.Users
+@model Hunting_and_Fishing.Models.Register
 
 @using (Html.BeginForm("Register", "Account", FormMethod.Post))
 {
@@ -34,7 +34,9 @@
             @Html.PasswordFor(model => model.ConfirmPassword)
 
         </div>
-
+                <a href="~/Views/Account/RegisterUserInfo/@Model.Id">
+                <input type="submit" value="Sign" class="btn btn-default" />
+                </a>
         <div class="form-group">
 
             <input type="submit" value="Sign up" class="btn btn-default" />
