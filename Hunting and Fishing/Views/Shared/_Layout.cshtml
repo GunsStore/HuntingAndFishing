@@ -1,9 +1,18 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <title>@ViewBag.Title Hunting and Fishing</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+        <title>@ViewBag.Title Hunting and Fishing</title>
+        <meta charset="utf-8">
+        <title>Bootshop online Shopping cart</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <link id="callCss" rel="stylesheet" href="../../Scripts/bootshop/bootstrap.min.css" media="screen" />
+        <link href="../../Content/css/base.css" rel="stylesheet" media="screen" />
+        <link href="../../Content/css/bootstrap-responsive.min.css" rel="stylesheet" />
+        <link href="../../Content/css/font-awesome.css" rel="stylesheet" type="text/css">
+        <link href="../../Scripts/prettify.js" rel="stylesheet" />
+        <style type="text/css" id="enject"></style>  
 </head>
 
 <body>
@@ -29,7 +38,7 @@
                     <button type="submit" id="submitButton" class="btn btn-primary">Go</button>
                 </form>*@
             <ul id="topMenu" class="nav pull-right">
-                <li class=""><a href="@*special_offer.html*@">Specials Offer</a></li>
+                <li class=""><a href="">Specials Offer</a></li>
                 <li class=""><a href="@*normal.html*@">Delivery</a></li>
                 <li class=""><a href="@*contact.html*@">Contact</a></li>
                 <li class="">
@@ -39,7 +48,7 @@
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                             <h3>Login Block</h3>
                         </div>
-                        @*@Html.Partial("~/Views/Account/_Login.cshtml")*@
+                        @Html.Partial("~/Views/Account/_Login.cshtml")
                     </div>
                 </li>
                 <li class="">
@@ -50,7 +59,7 @@
                             <h3>Register</h3>
                         </div>
                         <div class="modal-body">
-                            @*@Html.Partial("~/Views/Account/_Register.cshtml")*@
+                            @Html.Partial("~/Views/Account/_Register.cshtml")
                         </div>
                     </div>
                 </li>
