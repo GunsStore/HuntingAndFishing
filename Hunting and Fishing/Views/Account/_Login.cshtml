@@ -9,9 +9,10 @@
         @Html.AntiForgeryToken()
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-             @Html.LabelFor(model => model.Username)
+            
+            @Html.LabelFor(model => model.Username)
 
-             @Html.TextBoxFor(model => model.Username)
+            @Html.TextBoxFor(model => model.Username)
 
         </div>
 
@@ -20,6 +21,7 @@
              @Html.LabelFor(model => model.Password)
 
              @Html.PasswordFor(model => model.Password)
+        
         </div>
 
         <div class="form-group">

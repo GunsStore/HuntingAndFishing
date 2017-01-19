@@ -1,3 +1,5 @@
+using System.Security.Principal;
+
 namespace Hunting_and_Fishing.Models
 {
     using System;
@@ -13,9 +15,11 @@ namespace Hunting_and_Fishing.Models
         }
 
         public virtual DbSet<Register>Users { get; set; }
-
+        public virtual IPrincipal Register { get; internal set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
         }
+
+        public System.Data.Entity.DbSet<Hunting_and_Fishing.Models.LogIn> LogIns { get; set; }
     }
 }

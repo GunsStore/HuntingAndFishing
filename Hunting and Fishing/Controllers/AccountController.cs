@@ -22,46 +22,42 @@ namespace Hunting_and_Fishing.Controllers
         public ActionResult Register(Register model)
 
         {
-
-            if (ModelState.IsValid)
-
-            {
-
-                using (StoreDbContext db = new StoreDbContext())
+            
+                if (ModelState.IsValid)
 
                 {
-                    //Password hash
-                    var password = model.Password;
-                    byte[] data = System.Text.Encoding.ASCII.GetBytes(password);
-                    data = new System.Security.Cryptography.SHA256Managed().ComputeHash(data);
-                    String hash = System.Text.Encoding.ASCII.GetString(data);
 
-                    var confPass = model.ConfirmPassword;
-                    byte[] cdata = System.Text.Encoding.ASCII.GetBytes(confPass);
-                    cdata = new System.Security.Cryptography.SHA256Managed().ComputeHash(cdata);
-                    String chash = System.Text.Encoding.ASCII.GetString(cdata);
+                    using (StoreDbContext db = new StoreDbContext())
 
-                    model.Password = hash;
-                    model.ConfirmPassword = chash;
+                    {
+                        //Password hash
+                        var password = model.Password;
+                        byte[] data = System.Text.Encoding.ASCII.GetBytes(password);
+                        data = new System.Security.Cryptography.SHA256Managed().ComputeHash(data);
+                        String hash = System.Text.Encoding.ASCII.GetString(data);
 
-                    
+                        var confPass = model.ConfirmPassword;
+                        byte[] cdata = System.Text.Encoding.ASCII.GetBytes(confPass);
+                        cdata = new System.Security.Cryptography.SHA256Managed().ComputeHash(cdata);
+                        String chash = System.Text.Encoding.ASCII.GetString(cdata);
 
-                    db.Users.Add(model);
+                        model.Password = hash;
+                        model.ConfirmPassword = chash;
 
-                    db.SaveChanges();
 
-                    ModelState.Clear();
+                        db.Users.Add(model);
 
-                    model = null;
+                        db.SaveChanges();
 
-                    ViewBag.Message = "Successfully Registration Done";
+                        ModelState.Clear();
 
-                }
+                        model = null;
 
-            }
+                        ViewBag.Message = "Successfully Registration Done";
 
+                    }
+                }           
             return View("~/Views/Home/Index.cshtml");
-
         }
 
         public ActionResult Login()
@@ -76,32 +72,38 @@ namespace Hunting_and_Fishing.Controllers
             if (ModelState.IsValid)
             {
                 using (StoreDbContext db = new StoreDbContext())
-            {
-
-                var password = model.Password;
-                byte[] data = System.Text.Encoding.ASCII.GetBytes(password);
-                data = new System.Security.Cryptography.SHA256Managed().ComputeHash(data);
-                String hash = System.Text.Encoding.ASCII.GetString(data);
-
-                model.Password = hash;
-
-                var user = db.Users.FirstOrDefault(a => a.Username.Equals(model.Username) && a.Password.Equals(model.Password));
-                if (user != null)
                 {
-                    return RedirectToAction("LoggedIn"); //after login
+
+                    var password = model.Password;
+                    byte[] data = System.Text.Encoding.ASCII.GetBytes(password);
+                    data = new System.Security.Cryptography.SHA256Managed().ComputeHash(data);
+                    String hash = System.Text.Encoding.ASCII.GetString(data);
+
+                    model.Password = hash;
+                    try
+                    {
+                        var user =
+                            db.Users.FirstOrDefault(
+                                a => a.Username.Equals(model.Username) && a.Password.Equals(model.Password));
+                        if (user != null)
+                        {
+                            return RedirectToAction("LoggedIn"); //after login
+                        }
+                    }
+                    catch (Exception)
+                    {
+
+                        return View("~/Views/Home/Index.cshtml");
+                    }
                 }
-                else
-                {
-                    
-                }
-            }
+
             }
             return View("~/Views/Home/Index.cshtml");
         }
 
         public ActionResult LoggedIn()
-        {  
-                return View();
+        {
+            return View();
         }
 
     }

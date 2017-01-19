@@ -12,5 +12,10 @@ namespace Hunting_and_Fishing.Controllers
         {
             return View();
         }
+
+        public ActionResult Contact()
+        {
+            return View();
+        }
     }
 }

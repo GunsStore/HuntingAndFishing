@@ -1,5 +1,4 @@
-﻿@using System.Web.UI.HtmlControls
-@model Hunting_and_Fishing.Models.Register
+﻿@model Hunting_and_Fishing.Models.Register
 
 @using (Html.BeginForm("Register", "Account", FormMethod.Post))
 {
@@ -8,13 +7,15 @@
         @Html.AntiForgeryToken()
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
+
             @Html.LabelFor(model => model.Username)
 
             @Html.TextBoxFor(model => model.Username)
-
+       
         </div>
 
         <div class="form-group">
+
             @Html.LabelFor(model => model.Email)
 
             @Html.TextBoxFor(model => model.Email)
@@ -22,6 +23,7 @@
         </div>
 
         <div class="form-group">
+
             @Html.LabelFor(model => model.Password)
 
             @Html.PasswordFor(model => model.Password)
@@ -29,12 +31,13 @@
         </div>
 
         <div class="form-group">
+
             @Html.LabelFor(model => model.ConfirmPassword)
 
             @Html.PasswordFor(model => model.ConfirmPassword)
 
         </div>
-          
+
         <div class="form-group">
 
             <input type="submit" value="Sign up" class="btn btn-default" />
