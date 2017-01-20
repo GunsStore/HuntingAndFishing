@@ -4,21 +4,21 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Hunting_and_Fishing.Models;
+using Microsoft.AspNet.Identity;
 
 namespace Hunting_and_Fishing.Controllers
 {
     public class AccountController : Controller
     {
-        // GET: Account
+        // REGISTER------------------------------------------------------------------------------------------------
+
         public ActionResult Register()
         {
             return View("~/Views/Account/_Register.cshtml");
         }
 
         [HttpPost]
-
         [ValidateAntiForgeryToken]
-
         public ActionResult Register(Register model)
 
         {
@@ -60,6 +60,8 @@ namespace Hunting_and_Fishing.Controllers
             return View("~/Views/Home/Index.cshtml");
         }
 
+        //LOGIN------------------------------------------------------------------------------------------------
+
         public ActionResult Login()
         {
             return View("~/Views/Account/_Login.cshtml");
@@ -82,12 +84,13 @@ namespace Hunting_and_Fishing.Controllers
                     model.Password = hash;
                     try
                     {
+                       
                         var user =
                             db.Users.FirstOrDefault(
                                 a => a.Username.Equals(model.Username) && a.Password.Equals(model.Password));
                         if (user != null)
                         {
-                            return RedirectToAction("LoggedIn"); //after login
+                            return RedirectToAction("LoggedIn",model); //after login
                         }
                     }
                     catch (Exception)
@@ -101,10 +104,9 @@ namespace Hunting_and_Fishing.Controllers
             return View("~/Views/Home/Index.cshtml");
         }
 
-        public ActionResult LoggedIn()
+        public ActionResult LoggedIn(LogIn model)
         {
-            return View();
+            return View("~/Views/Account/LoggedIn.cshtml",model);
         }
-
     }
 }
