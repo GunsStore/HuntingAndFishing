@@ -27,7 +27,7 @@
             <a class="brand"><img src="../../Content/img/logo.jpg" style="width: 193px; height: 47px" alt="Bootsshop"></a>
 
             <ul id="topMenu" class="nav pull-right">
-                <li class="">@Html.ActionLink("Welcome " + Model.Username, "LoggedIn", "Account")</li>
+                <li class="">@Html.ActionLink("Welcome " @*+ Model.Username*@, "LoggedIn", "Account")</li>
                 <li class="">  </li>
                 <li class="">@Html.ActionLink("Contact", "Contact", "Home")</li>
                 <li class="">  </li>

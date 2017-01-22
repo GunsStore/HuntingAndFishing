@@ -29,37 +29,6 @@ namespace Hunting_and_Fishing.Models
         [Compare("Password", ErrorMessage = "Confirm your Password.")]
         public string ConfirmPassword { get; set; }
 
-        //[StringLength(50)]
-        //public string FirstName { get; set; }
-
-        //[StringLength(50)]
-        //public string MiddleName { get; set; }
-
-        //[StringLength(50)]
-        //public string LastName { get; set; }
-
-        //[StringLength(50)]
-        //public string City { get; set; }
-
-        //[StringLength(50)]
-        //public string Address { get; set; }
-
-        //[StringLength(50)]
-        //public string ZIP { get; set; }
-
-        //[StringLength(20)]
-        //public int PhoneNumber { get; set; }
-
-        //[StringLength(10)]
-        //public int EGN { get; set; }
-
-        //[StringLength(9)]
-        //public int IDNO { get; set; }
-
-        //[StringLength(50)]
-        //public string IssuedFrom { get; set; }
-        
-        //public DateTime IssuedOn { get; set; }
     }
 
     public class LogIn

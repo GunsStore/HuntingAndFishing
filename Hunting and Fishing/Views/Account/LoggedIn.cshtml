@@ -6,6 +6,10 @@
 
 <h2>Logged in</h2>
 <div align="center">
-    
+    @Html.ActionLink("Cakni tuk", "RegisterUserInfo","RegisterUserInfo","Views", new { @Id=Model.Id})
+    @if (Model.Id!= 256)
+    {
+        <h1>Bravo na men</h1>
+    }
 </div>
 

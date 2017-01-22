@@ -84,13 +84,21 @@ namespace Hunting_and_Fishing.Controllers
                     model.Password = hash;
                     try
                     {
-                       
-                        var user =
-                            db.Users.FirstOrDefault(
-                                a => a.Username.Equals(model.Username) && a.Password.Equals(model.Password));
+                        LogIn user = new Models.LogIn();
+
+                        foreach (var us in db.Users)
+                        {
+                            if (us.Username == model.Username && us.Password == model.Password)
+                            {
+                                user.Id = us.Id;
+                                user.Username = us.Username;
+                                user.Password = us.Password;
+                                break;
+                            }
+                        }
                         if (user != null)
                         {
-                            return RedirectToAction("LoggedIn",model); //after login
+                            return RedirectToAction("LoggedIn",user); //after login
                         }
                     }
                     catch (Exception)
@@ -106,7 +114,8 @@ namespace Hunting_and_Fishing.Controllers
 
         public ActionResult LoggedIn(LogIn model)
         {
-            return View("~/Views/Account/LoggedIn.cshtml",model);
+            return View("~/Views/Account/LoggedIn.cshtml", model);
         }
+        
     }
 }
