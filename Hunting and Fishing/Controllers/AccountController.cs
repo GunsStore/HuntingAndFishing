@@ -4,118 +4,150 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Hunting_and_Fishing.Models;
-using Microsoft.AspNet.Identity;
 
 namespace Hunting_and_Fishing.Controllers
 {
     public class AccountController : Controller
     {
-        // REGISTER------------------------------------------------------------------------------------------------
+        // GET: Account
+        //public ActionResult Index()
+        //{
+        //    using (StoreProjectDBContext db =new StoreProjectDBContext())
+        //    {
+        //        return View(db.UserAccount.ToList());
+        //    }
+        //}
 
         public ActionResult Register()
         {
-            return View("~/Views/Account/_Register.cshtml");
+            return View();
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Register(Register model)
-
-        {
-            
-                if (ModelState.IsValid)
-
-                {
-
-                    using (StoreDbContext db = new StoreDbContext())
-
-                    {
-                        //Password hash
-                        var password = model.Password;
-                        byte[] data = System.Text.Encoding.ASCII.GetBytes(password);
-                        data = new System.Security.Cryptography.SHA256Managed().ComputeHash(data);
-                        String hash = System.Text.Encoding.ASCII.GetString(data);
-
-                        var confPass = model.ConfirmPassword;
-                        byte[] cdata = System.Text.Encoding.ASCII.GetBytes(confPass);
-                        cdata = new System.Security.Cryptography.SHA256Managed().ComputeHash(cdata);
-                        String chash = System.Text.Encoding.ASCII.GetString(cdata);
-
-                        model.Password = hash;
-                        model.ConfirmPassword = chash;
-
-
-                        db.Users.Add(model);
-
-                        db.SaveChanges();
-
-                        ModelState.Clear();
-
-                        model = null;
-
-                        ViewBag.Message = "Successfully Registration Done";
-
-                    }
-                }           
-            return View("~/Views/Home/Index.cshtml");
-        }
-
-        //LOGIN------------------------------------------------------------------------------------------------
-
-        public ActionResult Login()
-        {
-            return View("~/Views/Account/_Login.cshtml");
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Login(LogIn model)
+        public ActionResult Register(UserAccount account)
         {
             if (ModelState.IsValid)
             {
-                using (StoreDbContext db = new StoreDbContext())
+                using (StoreProjectDBContext db = new StoreProjectDBContext())
                 {
-
-                    var password = model.Password;
-                    byte[] data = System.Text.Encoding.ASCII.GetBytes(password);
-                    data = new System.Security.Cryptography.SHA256Managed().ComputeHash(data);
-                    String hash = System.Text.Encoding.ASCII.GetString(data);
-
-                    model.Password = hash;
-                    try
-                    {
-                        LogIn user = new Models.LogIn();
-
-                        foreach (var us in db.Users)
-                        {
-                            if (us.Username == model.Username && us.Password == model.Password)
-                            {
-                                user.Id = us.Id;
-                                user.Username = us.Username;
-                                user.Password = us.Password;
-                                break;
-                            }
-                        }
-                        if (user != null)
-                        {
-                            return RedirectToAction("LoggedIn",user); //after login
-                        }
-                    }
-                    catch (Exception)
-                    {
-
-                        return View("~/Views/Home/Index.cshtml");
-                    }
+                    db.UserAccount.Add(account);
+                    db.SaveChanges();
                 }
 
+                ModelState.Clear();
+                return RedirectToAction("LogIn");
             }
-            return View("~/Views/Home/Index.cshtml");
+            return View();
         }
 
-        public ActionResult LoggedIn(LogIn model)
+        public ActionResult LogIn()
         {
-            return View("~/Views/Account/LoggedIn.cshtml", model);
+            return View();
         }
-        
+
+        [HttpPost]
+        public ActionResult LogIn(UserAccount user)
+        {
+            using (StoreProjectDBContext db = new StoreProjectDBContext())
+            {
+                try
+                {
+                    var usr = db.UserAccount.Single(u => u.Username == user.Username &&
+                                                         u.Password == user.Password);
+                    if (usr != null)
+                    {
+                        Session["UserId"] = Convert.ToInt32(usr.UserId);
+                        Session["Username"] = usr.Username;
+                        return RedirectToAction("LoggedInIndex", "Home");
+
+                    }
+                    ModelState.Clear();
+                }
+                catch (Exception)
+                {
+                    ModelState.AddModelError("", "Username or Password is wrong.");
+                }
+            }
+            return View();
+        }
+
+
+        public ActionResult LogOut()
+        {
+            Session.Clear();
+            return RedirectToAction("Index", "Home");
+        }
+
+
+        //public ActionResult UserInfo(UserInfo userInfo)
+        //{
+        //    //For security check this if statement
+        //    if (Session["UserId"] != null)
+        //    {
+        //        var remUserInfo = new List<UserInfo>();
+        //        using (StoreProjectDBContext db = new StoreProjectDBContext())
+        //        {
+        //            var infoUser = db.UserInfo.ToList();
+                    
+        //            foreach (var index in infoUser)
+        //            {
+        //                if (Session["UserId"].Equals(index.UserId))
+        //                {
+        //                    remUserInfo.Add(index);
+        //                }
+        //            }
+        //        }
+        //        return View(remUserInfo);
+        //    }
+        //    return RedirectToAction("LogIn");
+        //}
+
+    
+        public ActionResult EditUserInfo()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult EditUserInfo(UserInfo userInfo)
+        {
+            if (Session["UserId"] != null)
+            {
+                var userId = Convert.ToInt32(Session["UserId"]);
+                userInfo.UserId = userId;
+                if (ModelState.IsValid)
+                {
+                    using (StoreProjectDBContext db = new StoreProjectDBContext())
+                    {
+                        db.UserInfo.Add(userInfo);
+                        db.SaveChanges();
+                    }
+                    ModelState.Clear();
+                }
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("LogIn");
+            }
+        }
     }
+
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

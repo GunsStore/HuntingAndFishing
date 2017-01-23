@@ -21,6 +21,10 @@
     width: 48px;
 }
 
+.register {
+    color: red
+}
+
 .clr {
     clear: both;
 }

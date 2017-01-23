@@ -13,12 +13,16 @@ namespace Hunting_and_Fishing.Controllers
             return View();
         }
 
-        public ActionResult Contact()
+        public ActionResult LoggedInIndex()
         {
-            return View();
+            if (Session["UserId"] != null)
+            {
+                return View();
+            }
+            return RedirectToAction("LogIn","Account");
         }
 
-        public ActionResult Test()
+        public ActionResult Contact()
         {
             return View();
         }
